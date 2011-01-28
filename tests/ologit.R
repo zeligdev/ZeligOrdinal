@@ -1,30 +1,30 @@
 library(zelig.ordinal)
 
-#####  Example 1: First Differences
-
-# Load the sample data: 
 data(sanction)
 
-# Estimate the empirical model and returning the coefficients:
-user.prompt()
-z.out1 <- zelig(as.factor(cost) ~ mil + coop, model = "ologit", 
-                   data = sanction)
-user.prompt()
-summary(z.out1)
+
+z.out1 <- zelig(
+                cost ~ mil + coop,
+                model = "ologit", 
+                data = sanction
+                )
+
+
+#summary(z.out1)
+
 
 # Set the explanatory variables to their means, with 'mil' set
 # to 0 (no military action in addition to sanctions) in the baseline
 # case and set to 1 (military action in addition to sanctions) in the
 # alternative case:
-user.prompt()
+
 x.low <- setx(z.out1, coop = 1)
 x.high <- setx(z.out1, coop = 4)
 
-# Generate simulated fitted values and first differences, and view 
-# the results:
-user.prompt()
+
 s.out1 <- sim(z.out1, x = x.low, x1 = x.high)
-user.prompt()
+
+q()
 summary(s.out1)
 user.prompt()
 plot(s.out1)
