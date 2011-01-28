@@ -1,10 +1,10 @@
 Package: zelig.ordinal
 Type: Package
-Title: What the package does (short line)
+Title: Implements Ordinal Binomial Models in Zelig
 Version: 1.0
 Date: 2011-01-28
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Matt Owen, Kosuke Imai, Gary King, and Olivia Lau
+Maintainer: Matt Owen <mowen@iq.harvard.edu>
+Description: Implements Ordinal Probit and Logit Regression Models in Zelig
+License: GPL
 LazyLoad: yes

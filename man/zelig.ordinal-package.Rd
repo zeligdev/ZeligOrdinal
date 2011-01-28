@@ -3,12 +3,11 @@
 \alias{zelig.ordinal}
 \docType{package}
 \title{
-What the package does (short line)
-~~ package title ~~
+Implements Ordinal Regression Models in Zelig
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+  Provides Ordinal Logit and Probit Regression Models in Zelig, along with
+  a set of plotting, quantity of interest, and summary functions.
 }
 \details{
 \tabular{ll}{
@@ -16,28 +15,24 @@ Package: \tab zelig.ordinal\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2011-01-28\cr
-License: \tab What license is it under?\cr
+License: \tab GPL\cr
 LazyLoad: \tab yes\cr
 }
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
 }
 \author{
-Who wrote it
+  Matt Owen, Kosuke Imai, Gary King, and Olivia Lau
 
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+  Maintainer: Matt Owen<mowen@iq.harvard.edu>
 }
 \references{
-~~ Literature or other references for background information ~~
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
-~~ the R documentation directory ~~
 \keyword{ package }
+\keyword{ Zelig }
+\keyword{ ordinal }
+\keyword{ probit }
+\keyword{ logit }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+  
 }
 \examples{
-~~ simple examples of the most important functions ~~
 }
