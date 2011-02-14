@@ -1,36 +1,178 @@
+#' qi.ologit
+#' computes quantities of interest for ologit/oprobit models
+#' this function is called by the sim function
+#' NOTE: the following is paraphrased from Zelig 3.4-8
+#' @param z zelig object
+#' @param x setx object
+#' @param x1 setx object
+#' @param y ATT variable
+#' @param num implicitly called by sim - number of simulations to run
+#' @param param param object contains: link, link-inverse, simulations, ancillary parameters
 qi.ologit <- function(z, x, x1=NULL, y=NULL, num=1000, param=NULL) {
-
-
+  # startup work
   simulations <- coef(param)
   coef <- coef(z)
+  linkinv <- linkinv(param)
 
   # simulations on coefficients
-  sim.coef <- simulations[,1:length(coef)]
+  sim.coef <- simulations[,1:length(coef), drop=FALSE]
+
+  # remove (Intercept), make sure matrix is numeric
+  mat1 <- as.numeric(as.matrix(x)[,-1])
+  mat2 <- if (is.null(x1))
+    NULL
+  else
+    as.numeric(as.matrix(x1)[,-1])
+
+  # compute eta
+  eta1 <- t(mat1 %*% t(sim.coef))
+  eta2 <- if (is.null(x1))
+    NULL
+  else
+    t(mat2 %*% t(sim.coef))
 
   # simultations on zeta, and define theta
-  sim.zeta <- sim.theta <- simulations[,-1:-length(coef)]
-
-  # just copying this over. looks fishy
+  sim.zeta <- sim.theta <- simulations[,(length(coef)+1):ncol(simulations), drop=FALSE]
   sim.zeta[,-1] <- exp(sim.theta[,-1])
   sim.zeta <- t(apply(sim.zeta, 1, cumsum))
 
+
+  # compute expected values, etc.
+  ev1 <- .compute.ev(z, x, num, param, eta1, sim.zeta)
+  pr1 <- .compute.pr(z, x, num, param, eta1, sim.zeta)
+  ev2 <- .compute.ev(z, x1, num, param, eta2, sim.zeta)
+  pr2 <- .compute.pr(z, x1, num, param, eta2, sim.zeta)
+
+
+  # return value
+  list(
+       "Expected Values: P(Y=j|X)" = ev1,
+       "Expected Values: P(Y=j|X1)" = ev2,
+       "Predicted Values: Y|X" = pr1,
+       "Predicted Values: Y|X1" = pr2,
+       "First Differences: P(Y=j|X1) - P(Y=j|X)" = ev2 - ev1,
+       "Average Treatment Effect for Expected Values: " = NA,
+       "Risk Ratios" = ev2 / ev1
+       )
+}
+
+
+# .compute.ev
+# computes expected values
+# @param z zelig object
+# @param x setx object
+# @param num number of simulations
+# @param param param object
+.compute.ev <- function(z, x, num, param, eta, sim.zeta) {
+  if (is.null(x))
+    return(NA)
+
+  simulations <- coef(param)
+  coef <- coef(z)
+  linkinv <- linkinv(param)
+
+  # simulations on coefficients
+  sim.coef <- simulations[,1:length(coef), drop=FALSE]
+
   #
   k <- length(z[["zeta"]])+1
-  lev <- z[["lev"]]
 
   # remove (Intercept), make sure matrix is numeric
   mat <- as.numeric(as.matrix(x)[,-1])
 
   # compute eta
-  eta <- mat %*% t(sim.coef)
-  
-  #
-  
-  
+  eta <- t(mat %*% t(sim.coef))
+  #eta <- sim.coef %*% t(mat)
 
-  # print(as.matrix(x)[,-1])
-  # print(x)
-  
+  lev <- z$result$lev
 
-  q()
+  rows <- as.matrix(x)
+
+
+  Ipr <- cuts <- tmp0 <- {
+    array(
+          0, dim = c(num, k, nrow(rows)),
+          dimnames = list(1:num, lev, rownames(rows))
+          )
+  }
+
+  for (i in 1:num) {
+    cuts[i,,] <- t(linkinv(eta[i,], sim.zeta[i,]))
+  }
+
+  # NOTE:
+  #  2:k => 2, 3, 4, ..., k
+  #  2:k-1 => 1, 2, 3, 4, ..., k-1
+  tmp0[,2:k,] <- cuts[,2:k-1,]
+  
+  # why not. this was copied over from uncommented
+  # code, so part of me has no clue what's going on here
+  ev <- cuts - tmp0
+  dimnames(ev) <- list(1:num, z[["lev"]], rownames(x))
+
+  # remove unnecessary dimensions
+  if (dim(ev)[3] == 1)
+    ev <- ev[,,1]
+
+  colnames(ev) <- z[['lev']]
+
+  # return expected values
+  ev
+}
+
+
+#' .compute.pr
+#' computes predicted values
+#' @param z zelig object
+#' @param x setx object
+#' @param num number of simulations
+#' @param param param object
+.compute.pr <- function(z, x, num, param, eta, sim.zeta) {
+  if (is.null(x))
+    return(NA)
+
+  x <- as.matrix(x)
+  rows <- x
+
+  k <- length(z[["zeta"]]) + 1
+
+  lev <- z$result$lev
+
+  Ipr <- cuts <- tmp0 <- {
+    array(
+          0, dim = c(num, k, nrow(rows)),
+          dimnames = list(1:num, lev, rownames(rows))
+          )
+  }
+  linkinv <- linkinv(param)
+  for (i in 1:num) {
+    cuts[i,,] <- t(linkinv(eta[i,], sim.zeta[i,]))
+  }
+
+  pr <- matrix(NA, nrow=num, ncol=nrow(as.matrix(x)))
+  tmp <- matrix(
+                runif(length(cuts[,1,]), 0, 1),
+                nrow = num,
+                ncol = nrow(x)
+                )
+
+
+  k <- length(z[["zeta"]])+1
+  for (j in 1:k) {
+    Ipr[,j,] <- as.integer(tmp > cuts[,j,])
+  }
+
+  for (j in 1:nrow(x)) {
+    pr[,j] <- 1 + rowSums(Ipr[,,j,drop=FALSE])
+  }
+
+  # ugh, what does this even do?
+  factors <- factor(
+                   pr, labels=lev[1:length(lev) %in%
+                          sort(unique(pr))],
+                    ordered = TRUE
+                    )
+
+  # 
+  pr
 }

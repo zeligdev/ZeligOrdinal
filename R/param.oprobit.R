@@ -1,4 +1,4 @@
-param.ologit <- function(z, num=1000) {
+param.oprobit <- function(z, num=1000) {
 
   coef <- coef(z)
   zeta <- z[["zeta"]]
@@ -26,23 +26,19 @@ param.ologit <- function(z, num=1000) {
        
        alpha = NULL,
        link = NULL,
-       linkinv = .linkinverse
+       linkinv = .oprobit.linkinverse
        )
 }
 
 
 # @zeta:
 # @eta:
-.linkinverse <- function(eta, zeta) {
+.oprobit.linkinverse <- function(eta, zeta) {
     tmp1 <- matrix(1, nrow = length(eta), ncol = length(zeta) + 1)
 
-    # ilogit <- function(e, z) {
-    #   exp(z - e) / (1 + exp(z - e))
-    # }
-
-    tmp1[, 1:length(zeta)] <- exp(zeta - eta) / (1 + exp(zeta - eta))
+    tmp1[, 1:length(zeta)] <- pnorm(eta - zeta)
 
     # sapply(zeta, ilogit, e = eta)
 
     tmp1
-  }
+}
