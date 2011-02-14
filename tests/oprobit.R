@@ -18,8 +18,9 @@ x.high <- setx(z.out1, mil = 1)
 # Generate simulated fitted values and first differences, and view 
 # the results:
 s.out1 <- sim(z.out1, x = x.low, x1 = x.high)
-
 summary(s.out1)
+
+plot(s.out1)
 
 ##### Example 2: Creating An Ordered Dependent Variable #####
 
@@ -30,7 +31,6 @@ sanction$ncost <- factor(sanction$ncost, ordered = TRUE,
 
 # Z.Out the model:
 z.out2 <- zelig(ncost ~ mil + coop, model = "oprobit", data = sanction)
-
 summary(z.out2)
 
 # Set the explanatory variables to their observed values:  
@@ -41,7 +41,7 @@ s.out2 <- sim(z.out2, x = x.out2)
 
 summary(s.out2)
 
-
+plot(s.out2)
 
 
 

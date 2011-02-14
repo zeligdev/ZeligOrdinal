@@ -23,8 +23,9 @@ plot.sim.ologit <- function(x, ..., alt.color=NULL) {
     # and we just quit
     return(par(original.par))
 
-  else if (is.null(x$x1))
-    panels <- matrix(c(1, 3, 2, 4), ncol=2)
+  else if (is.null(x$x1) || is.na(x$x1)) {
+    panels <- matrix(c(1, 2), nrow=2)
+  }
     # the plotting device:
     #
     # +--------+
@@ -34,7 +35,7 @@ plot.sim.ologit <- function(x, ..., alt.color=NULL) {
     # +--------+
 
 
-  else
+  else {
     panels <- matrix(c(1, 3, 5, 2, 4, 5), ncol=2)
     # the plotting device:
     #
@@ -45,6 +46,7 @@ plot.sim.ologit <- function(x, ..., alt.color=NULL) {
     # +-----+-----+
     # |   5       |
     # +-----------+
+  }
 
   # layout graphing device
   layout(panels)
@@ -80,12 +82,11 @@ plot.sim.ologit <- function(x, ..., alt.color=NULL) {
 #' @param summ a matrix 
 #' @param label a character-string specifying which QI to extract
 .plot.pv <- function(summ, label="", alt.colors=NULL) {
-  if (is.na(summ) || is.null(summ))
+  if (is.na(summ[[label]]) || is.null(summ[[label]]))
     return()
 
   bars <- 100 * summ[[label]][,1]
   labels <- rownames(summ[[label]])
-
   barplot(
           bars,
           horiz = TRUE,

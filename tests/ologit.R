@@ -51,6 +51,8 @@ x.out2 <- setx(z.out2, fn = NULL)
 s.out2 <- sim(z.out2, x = x.out2)
 summary(s.out2)
 
+plot(s.out2)
+
 
 
 
