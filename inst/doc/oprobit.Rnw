@@ -1,17 +1,31 @@
+\documentclass{article}
+
+\title{
+  ologit: Ordinal Logistic Regression for Ordered
+Categorical Dependent Variablest
+}
+\author{Matt Owen, Olivia Lau, Kosuke Imai, and Gary King}
+
 \SweaveOpts{results=hide, prefix.string=vigpics/oprobit}
-\include{zinput}
-%\VignetteIndexEntry{Ordinal Probit Regression for Ordered Categorical Dependent Variables}
-%\VignetteDepends{Zelig, MASS}
-%\VignetteKeyWords{model, probit,regression,ordinal, ordered,categorical}
-%\VignettePackage{Zelig}
+
+\usepackage{natbib}
+\usepackage{bibentry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{Zelig}
+\usepackage{Sweave}
+
 \begin{document}
+
 \nobibliography*
+
 <<beforepkgs, echo=FALSE>>=
  before=search()
 @
 
 <<loadLibrary, echo=F,results=hide>>=
-library(Zelig)
+library(zelig.ordinal)
 @
 
 \section{{\tt oprobit}: Ordinal Probit Regression for Ordered
@@ -19,8 +33,7 @@ Categorical Dependent Variables}\label{oprobit}
 
 Use the ordinal probit regression model if your dependent variables
 are ordered and categorical.  They may take on either integer values
-or character strings.  For a Bayesian implementation of this model,
-see \Sref{oprobit.bayes}.  
+or character strings.  
 
 \subsubsection{Syntax}
 
@@ -35,9 +48,7 @@ composed of character strings, such as ``strongly agree'', ``agree'',
 and ``disagree'', {\tt as.factor()} will order the values in the order
 in which they appear in {\tt Y}.  You will need to replace your
 dependent variable with a factored variable prior to estimating the
-model through {\tt zelig()}.  See \Sref{factors} for more information
-on creating ordered factors and Example \ref{ord.fact.p} below.
-
+model through {\tt zelig()}.
 \subsubsection{Example}
 \begin{enumerate}
 \item {Creating An Ordered Dependent Variable} \label{ord.fact.p}
@@ -69,7 +80,7 @@ Simulate fitted values given {\tt x.out} and view the results:
 %plot does not work but is nnot included in the demo 
 \begin{center}
 <<label=ExamplePlot,fig=true,echo=false>>= 
-# plot(s.out)
+plot(s.out)
 @ 
 \end{center}
 
@@ -244,15 +255,19 @@ below.
    \end{itemize}
 \end{itemize}
 
-\subsection*{How to Cite}
-\input{cites/oprobit}
-\input{citeZelig}
+
+\subsection*{How to Cite the Ordinal Logit Model}
+\bibentry{ImaLauKin-ologit11}
+
+\subsection*{How to Cite the Zelig Software Package}
+\CiteZelig
+
 \subsection*{See also}
 The ordinal probit function is part of the VGAM package by Thomas Yee \citep{YeeHas03}. In addition, advanced users may wish to refer to \texttt{help(vglm)} 
 in the VGAM library.  Additional documentation is available at
-\hlink{http://www.stat.auckland.ac.nz/\~\,yee}{http://www.stat.auckland.ac.nz/~yee}.Sample data are from \cite{Martin92}
-\bibliographystyle{asa}
-\bibliography{gk,gkpubs}
+\url{http://www.stat.auckland.ac.nz/\~\,yee}{http://www.stat.auckland.ac.nz/~yee}.Sample data are from \cite{Martin92}
+\bibliographystyle{plain}
+\bibliography{zelig.ordinal}
 <<afterpkgs, echo=FALSE>>=
  after<-search()
  torm<-setdiff(after,before)

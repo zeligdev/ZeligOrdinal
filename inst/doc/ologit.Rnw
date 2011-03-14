@@ -1,19 +1,31 @@
+\documentclass{article}
+
+\title{
+  ologit: Ordinal Logistic Regression for Ordered
+Categorical Dependent Variablest
+}
+\author{Matt Owen, Olivia Lau, Kosuke Imai, and Gary King}
+
 \SweaveOpts{results=hide, prefix.string=vigpics/ologit}
-\include{zinput}
-%\VignetteIndexEntry{Ordinal Logistic Regression  for Ordered Categorical Dependent Variables}
-%\VignetteDepends{Zelig, MASS}
-%\VignetteKeyWords{model, logistic,regression,ordinal, ordered,categorical}
-%\VignettePackage{Zelig}
+
+\usepackage{natbib}
+\usepackage{bibentry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{Zelig}
+\usepackage{Sweave}
+
 \begin{document}
+
 \nobibliography*
+
 <<beforepkgs, echo=FALSE>>=
  before=search()
 @
 
 <<loadLibrary, echo=F,results=hide>>=
-pkg <- search()
-if(!length(grep("package:Zelig",pkg)))
-library(Zelig)
+library(zelig.ordinal)
 @
 
 \section{{\tt ologit}: Ordinal Logistic Regression for Ordered
@@ -35,9 +47,8 @@ on values composed of character strings, such as ``strongly agree'',
 ``agree'', and ``disagree'', {\tt as.factor()} will order the values
 in the order in which they appear in {\tt Y}.  You will need to
 replace your dependent variable with a factored variable prior to
-estimating the model through {\tt zelig()}.  See Section \ref{factors}
-for more information on creating ordered factors and Example
-\ref{ord.fact} below.
+estimating the model through {\tt zelig()}.  See Example
+\ref{ord.fact} for more information on creating ordered factors.
 
 \subsubsection{Example}
 
@@ -232,16 +243,17 @@ below.
    \end{itemize}
 \end{itemize}
 
-\subsection* {How to Cite} 
+\subsection*{How to Cite the Ordinal Logit Model}
+\bibentry{ImaLauKin-ologit11}
 
-\input{cites/ologit}
-\input{citeZelig}
+\subsection*{How to Cite the Zelig Software Package}
+\CiteZelig
 
 \subsection* {See also}
 The ordinal logit model is part of the MASS package by William N. Venable and Brian D. Ripley \citep{VenRip02}. Advanced users may wish to refer to \texttt{help(polr)} as well as \cite{McCNel89}. Sample data are from \cite{Martin92}.
 
-\bibliographystyle{asa}
-\bibliography{gk,gkpubs}
+\bibliographystyle{plain}
+\bibliography{zelig.ordinal}
 <<afterpkgs, echo=FALSE>>=
  after<-search()
  torm<-setdiff(after,before)
