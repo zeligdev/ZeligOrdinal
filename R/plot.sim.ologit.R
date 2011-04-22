@@ -82,7 +82,7 @@ plot.sim.ologit <- function(x, ..., alt.color=NULL) {
 #' @param summ a matrix 
 #' @param label a character-string specifying which QI to extract
 .plot.pv <- function(summ, label="", alt.colors=NULL) {
-  if (is.na(summ[[label]]) || is.null(summ[[label]]))
+  if (is.null(summ[[label]]) || is.na(summ[[label]]) || is.null(summ[[label]]))
     return()
 
   bars <- 100 * summ[[label]][,1]

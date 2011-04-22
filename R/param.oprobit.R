@@ -1,7 +1,7 @@
 param.oprobit <- function(z, num=1000) {
 
   coef <- coef(z)
-  zeta <- z[["zeta"]]
+  zeta <- z$result$zeta
   theta <- zeta[1]
 
   for (k in 2:length(zeta))

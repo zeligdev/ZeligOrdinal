@@ -1,4 +1,4 @@
-zelig2oprobit <- function(model, formula, data, weights=1, ...) {
+zelig2oprobit <- function(formula, data, weights=1, ...) {
   list(
        .function = "polr",
 

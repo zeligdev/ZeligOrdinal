@@ -1,4 +1,4 @@
-zelig2ologit <- function(model, formula, data, weights=1, ...) {
+zelig2ologit <- function(formula, data, weights=1, ...) {
   list(
        .function = "polr",
 

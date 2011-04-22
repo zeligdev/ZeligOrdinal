@@ -18,7 +18,7 @@ summarize.oprobit <- function(q) {
 
   pr2 <- fd.matrix <- rr.matrix <- NA
 
-  if (!is.na(ev2.matrix)) {
+  if (!all(is.na(ev2.matrix))) {
     #
     pr2 <- as.matrix(table(q$pv2)/length(q$pv2))
     rownames(pr2) <- paste("Y=", colnames(q$ev2), "|X1", sep="")
@@ -65,7 +65,7 @@ summarize.oprobit <- function(q) {
 
   # return values
   # NOTE: this is very similar to qi.ologit
-  list(
+  summarized <- list(
        "Expected Values (for X): Pr(Y=j|X)" = ev1.matrix,
        "Expected Values (for X1): Pr(Y=j|X1)" = ev2.matrix,
        "Predicted Values (for X): Y=j|X" = pr1,
@@ -73,6 +73,9 @@ summarize.oprobit <- function(q) {
        "First Differences: Pr(Y=j|X1) - Pr(Y=j|X)" = fd.matrix,
        "Risk Ratios: Pr(Y=k|X1) / Pr(Y=j|X)" = rr.matrix
        )
+
+  class(summarized) <- "summarized.qi"
+  summarized
 }
 
 

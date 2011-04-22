@@ -75,7 +75,7 @@ qi.ologit <- function(z, x, x1=NULL, y=NULL, num=1000, param=NULL) {
   sim.coef <- simulations[,1:length(coef), drop=FALSE]
 
   #
-  k <- length(z[["zeta"]])+1
+  k <- length(z$result$zeta)+1
 
   # remove (Intercept), make sure matrix is numeric
   mat <- as.numeric(as.matrix(x)[,-1])
@@ -108,13 +108,14 @@ qi.ologit <- function(z, x, x1=NULL, y=NULL, num=1000, param=NULL) {
   # why not. this was copied over from uncommented
   # code, so part of me has no clue what's going on here
   ev <- cuts - tmp0
-  dimnames(ev) <- list(1:num, z[["lev"]], rownames(x))
+
+  dimnames(ev) <- list(1:num, z$result$lev, rownames(x))
 
   # remove unnecessary dimensions
   if (dim(ev)[3] == 1)
     ev <- ev[,,1]
 
-  colnames(ev) <- z[['lev']]
+  colnames(ev) <- z$result$lev
 
   # return expected values
   ev
@@ -134,7 +135,7 @@ qi.ologit <- function(z, x, x1=NULL, y=NULL, num=1000, param=NULL) {
   x <- as.matrix(x)
   rows <- x
 
-  k <- length(z[["zeta"]]) + 1
+  k <- length(z$result$zeta) + 1
 
   lev <- z$result$lev
 
@@ -157,7 +158,7 @@ qi.ologit <- function(z, x, x1=NULL, y=NULL, num=1000, param=NULL) {
                 )
 
 
-  k <- length(z[["zeta"]])+1
+  k <- length(z$result$zeta)+1
   for (j in 1:k) {
     Ipr[,j,] <- as.integer(tmp > cuts[,j,])
   }

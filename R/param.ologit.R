@@ -1,14 +1,14 @@
 param.ologit <- function(z, num=1000) {
 
   coef <- coef(z)
-  zeta <- z[["zeta"]]
+  zeta <- z$result$zeta
   theta <- zeta[1]
 
   for (k in 2:length(zeta))
     theta[k] <- log(zeta[k]-zeta[k-1])
 
   m <- matrix(
-              mvrnorm(num, mu=c(coef,theta), Sigma=vcov(z)),
+              mvrnorm(num, mu=c(coef, theta), Sigma=vcov(z)),
               nrow = num
               )
 
@@ -17,7 +17,7 @@ param.ologit <- function(z, num=1000) {
   list(
        simulations =
        matrix(
-         mvrnorm(num, mu=c(coef,theta), Sigma=vcov(z)),
+         mvrnorm(num, mu=c(coef, theta), Sigma=vcov(z)),
          nrow = num
          ),
 
