@@ -1,5 +1,5 @@
 #
-librar(zelig.ordinal)
+library(ordinal.zelig)
 
 sanction$ncost <- factor(
                          sanction$ncost,

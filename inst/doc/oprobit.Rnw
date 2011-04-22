@@ -1,8 +1,8 @@
 \documentclass{article}
 
 \title{
-  ologit: Ordinal Logistic Regression for Ordered
-Categorical Dependent Variablest
+  oprobit: Ordinal Probit Regression for Ordered
+  Categorical Dependent Variables
 }
 \author{Matt Owen, Olivia Lau, Kosuke Imai, and Gary King}
 
@@ -25,7 +25,7 @@ Categorical Dependent Variablest
 @
 
 <<loadLibrary, echo=F,results=hide>>=
-library(zelig.ordinal)
+library(ordinal.zelig)
 @
 
 \section{{\tt oprobit}: Ordinal Probit Regression for Ordered
@@ -267,7 +267,7 @@ The ordinal probit function is part of the VGAM package by Thomas Yee \citep{Yee
 in the VGAM library.  Additional documentation is available at
 \url{http://www.stat.auckland.ac.nz/\~\,yee}{http://www.stat.auckland.ac.nz/~yee}.Sample data are from \cite{Martin92}
 \bibliographystyle{plain}
-\bibliography{zelig.ordinal}
+\bibliography{ordinal.zelig}
 <<afterpkgs, echo=FALSE>>=
  after<-search()
  torm<-setdiff(after,before)
