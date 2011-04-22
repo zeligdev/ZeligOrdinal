@@ -1,4 +1,4 @@
-param.ologit <- function(z, num=1000) {
+param.ologit <- function(obj, num=1000, ...) {
 
   coef <- coef(z)
   zeta <- z$result$zeta

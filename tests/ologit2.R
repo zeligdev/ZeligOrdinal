@@ -1,6 +1,8 @@
 #
 library(ordinal.zelig)
 
+data(sanction)
+
 sanction$ncost <- factor(
                          sanction$ncost,
                          ordered = TRUE,

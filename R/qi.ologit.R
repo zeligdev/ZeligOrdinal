@@ -8,7 +8,7 @@
 #' @param y ATT variable
 #' @param num implicitly called by sim - number of simulations to run
 #' @param param param object contains: link, link-inverse, simulations, ancillary parameters
-qi.ologit <- function(z, x, x1=NULL, y=NULL, num=1000, param=NULL) {
+qi.ologit <- function(z, x, x1=NULL, y=NULL, param=NULL, num=1000) {
   # startup work
   simulations <- coef(param)
   coef <- coef(z)
