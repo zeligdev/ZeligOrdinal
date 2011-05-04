@@ -1,4 +1,14 @@
+#' Param Method for the \code{oprobit} Zelig Model
+#' @note This method is used by the \code{oprobit} Zelig model
+#' @S3method param oprobit
+#' @usage \method{param}{oprobit}(obj, num=1000, ...)
+#' @param obj a \code{zelig} object
+#' @param num an integer specifying the number of simulations to sample
+#' @param ... ignored parameters
+#' @return a list to be cast as a \code{parameters} object
+#' @author Matt Owen \email{mowen@@iq.harvard.edu}
 param.oprobit <- function(obj, num=1000, ...) {
+  z <- obj
 
   coef <- coef(z)
   zeta <- z$result$zeta

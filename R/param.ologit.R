@@ -1,4 +1,14 @@
+#' Param Method for the 'ologit' Zelig Model
+#' @note This method is used by the 'ologit' Zelig model
+#' @S3method param ologit
+#' @usage \method{param}{ologit}(obj, num=1000, ...)
+#' @param obj a 'zelig' object
+#' @param num an integer specifying the number of simulations to sample
+#' @param ... ignored parameters
+#' @return a list to be cast as a 'parameters' object
+#' @author Matt Owen \email{mowen@@iq.harvard.edu}
 param.ologit <- function(obj, num=1000, ...) {
+  z <- obj
 
   coef <- coef(z)
   zeta <- z$result$zeta

@@ -16,6 +16,11 @@
 \usepackage{Zelig}
 \usepackage{Sweave}
 
+%\VignetteIndexEntry{Ordinal Probit Regression for Ordered Categorical Dependent Variables}
+%\VignetteDepends{Zelig}
+%\VignetteKeyWords{model, ordinal, probit}
+%\VignettePackage{ordinal.zelig}
+
 \begin{document}
 
 \nobibliography*

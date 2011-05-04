@@ -16,6 +16,11 @@ Categorical Dependent Variablest
 \usepackage{Zelig}
 \usepackage{Sweave}
 
+%\VignetteIndexEntry{Ordinal Logistic Regression for Ordered Categorical Dependent Variables}
+%\VignetteDepends{Zelig}
+%\VignetteKeyWords{model, ordinal, logit}
+%\VignettePackage{ordinal.zelig}
+
 \begin{document}
 
 \nobibliography*

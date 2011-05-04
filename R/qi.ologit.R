@@ -1,14 +1,16 @@
-#' qi.ologit
-#' computes quantities of interest for ologit/oprobit models
-#' this function is called by the sim function
-#' NOTE: the following is paraphrased from Zelig 3.4-8
-#' @param z zelig object
+#' Simulate Quantities of Interest for \code{ologit} Model
+#' @S3method qi ologit
+#' @usage \method{qi}{ologit}(obj, x, x1=NULL, y=NULL, num=1000, param=NULL)
+#' @note This function is paraphrased from Zelig v3.4.0-1
+#' @param obj zelig object
 #' @param x setx object
 #' @param x1 setx object
 #' @param y ATT variable
 #' @param num implicitly called by sim - number of simulations to run
 #' @param param param object contains: link, link-inverse, simulations, ancillary parameters
-qi.ologit <- function(z, x, x1=NULL, y=NULL, param=NULL, num=1000) {
+qi.ologit <- function(obj, x, x1=NULL, y=NULL, num=1000, param=NULL) {
+  z <- obj
+
   # startup work
   simulations <- coef(param)
   coef <- coef(z)

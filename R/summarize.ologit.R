@@ -1,9 +1,11 @@
 #' summarize.ologit
 #' summarizes simulations of quantities of interest
-#' @param q a quantity of interest object
-summarize.oprobit <- function(q) {
+#' @param qi a quantity of interest object
+summarize.ologit <- function(qi) {
   # number of rows is based on the number
   # of columns returned from the qi function
+  q <- qi
+  
   nrows <- ncol <- ncol(q$ev1)
 
 

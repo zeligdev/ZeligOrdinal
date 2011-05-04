@@ -1,11 +1,17 @@
 Package: ordinal.zelig
 Type: Package
 Title: Implements Ordinal Binomial Models in Zelig
-Version: 1.0
-Date: 2011-04-22
+Version: 1.0-1
+Date: 2011-05-04
 Author: Matt Owen, Kosuke Imai, Gary King, and Olivia Lau
-Depends: Zelig
+Depends: Zelig, MASS
 Maintainer: Matt Owen <mowen@iq.harvard.edu>
-Description: Implements Ordinal Probit and Logit Regression Models in Zelig
+Description: Implements Ordinal Probit and Logit Regression Models in
+    Zelig
 License: GPL
 LazyLoad: yes
+Collate: 'describe.ologit.R' 'describe.oprobit.R'
+    'ordinal.zelig-packaeg.R' 'param.ologit.R' 'param.oprobit.R'
+    'plot.sim.ologit.R' 'plot.sim.oprobit.R' 'qi.ologit.R'
+    'qi.oprobit.R' 'summarize.ologit.R' 'summarize.oprobit.R'
+    'zelig2ologit.R' 'zelig2oprobit.R'

@@ -1,7 +1,9 @@
 #' plot.sim.ologit
-#' @param x a sim.ologit object
+#' @param x a \code{sim.ologit} object
 #' @param ... ignored parameters
-#' @param alt.colors list of colors to print with
+#' @param alt.color list of colors to print with
+#' @return function is used for its side-effects
+#' @export
 plot.sim.ologit <- function(x, ..., alt.color=NULL) {
   # num.factors <- length(
   original.par <- par(no.readonly=TRUE)
