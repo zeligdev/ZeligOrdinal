@@ -8,6 +8,7 @@
 #' @param y ATT variable
 #' @param num implicitly called by sim - number of simulations to run
 #' @param param param object contains: link, link-inverse, simulations, ancillary parameters
+#' @return a list containing simulated quantities of interest
 qi.ologit <- function(obj, x, x1=NULL, y=NULL, num=1000, param=NULL) {
   z <- obj
 
