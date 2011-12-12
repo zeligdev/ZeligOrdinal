@@ -2,7 +2,7 @@
 #'
 #' \tabular{ll}{
 #' Package: \tab ordina.zelig\cr
-#' Version: \tab 1.0-2\cr
+#' Version: \tab 1.0-3\cr
 #' Date: \tab 2011-05-04\cr
 #' Depends: \tab Zelig (>= 4.0-4), MASS\cr
 #' License: \tab GPL version 2 or newer\cr
@@ -15,8 +15,8 @@
 #' oprobit: \tab Ordinal Probit Regression \cr
 #' }
 #' 
-#' @name ordinal.zelig-package
-#' @aliases ordinal.zelig
+#' @name zelig.ordinal-package
+#' @aliases zelig.ordinal
 #' @docType package
 #' @author Matt Owen \email{mowen@@iq.harvard.edu}, Kosuke Imai, Olivia Lau,
 #'   and Gary King 
