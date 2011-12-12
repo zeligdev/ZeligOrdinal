@@ -1,5 +1,5 @@
 #
-library(ordinal.zelig)
+library(ZeligOrdinal)
 
 data(sanction)
 

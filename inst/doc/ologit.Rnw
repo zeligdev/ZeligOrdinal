@@ -19,7 +19,7 @@ Categorical Dependent Variablest
 %\VignetteIndexEntry{Ordinal Logistic Regression for Ordered Categorical Dependent Variables}
 %\VignetteDepends{Zelig}
 %\VignetteKeyWords{model, ordinal, logit}
-%\VignettePackage{ordinal.zelig}
+%\VignettePackage{ZeligOrdinal}
 
 \begin{document}
 
@@ -30,7 +30,7 @@ Categorical Dependent Variablest
 @
 
 <<loadLibrary, echo=F,results=hide>>=
-library(ordinal.zelig)
+library(ZeligOrdinal)
 @
 
 \section{{\tt ologit}: Ordinal Logistic Regression for Ordered
@@ -258,7 +258,7 @@ below.
 The ordinal logit model is part of the MASS package by William N. Venable and Brian D. Ripley \citep{VenRip02}. Advanced users may wish to refer to \texttt{help(polr)} as well as \cite{McCNel89}. Sample data are from \cite{Martin92}.
 
 \bibliographystyle{plain}
-\bibliography{ordinal.zelig}
+\bibliography{ZeligOrdinal}
 <<afterpkgs, echo=FALSE>>=
  after<-search()
  torm<-setdiff(after,before)

@@ -19,7 +19,7 @@
 %\VignetteIndexEntry{Ordinal Probit Regression for Ordered Categorical Dependent Variables}
 %\VignetteDepends{Zelig}
 %\VignetteKeyWords{model, ordinal, probit}
-%\VignettePackage{ordinal.zelig}
+%\VignettePackage{ZeligOrdinal}
 
 \begin{document}
 
@@ -30,7 +30,7 @@
 @
 
 <<loadLibrary, echo=F,results=hide>>=
-library(ordinal.zelig)
+library(ZeligOrdinal)
 @
 
 \section{{\tt oprobit}: Ordinal Probit Regression for Ordered
@@ -272,7 +272,7 @@ The ordinal probit function is part of the VGAM package by Thomas Yee \citep{Yee
 in the VGAM library.  Additional documentation is available at
 \url{http://www.stat.auckland.ac.nz/\~\,yee}{http://www.stat.auckland.ac.nz/~yee}.Sample data are from \cite{Martin92}
 \bibliographystyle{plain}
-\bibliography{ordinal.zelig}
+\bibliography{ZeligOrdinal}
 <<afterpkgs, echo=FALSE>>=
  after<-search()
  torm<-setdiff(after,before)

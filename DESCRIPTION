@@ -1,7 +1,7 @@
-Package: ordinal.zelig
+Package: ZeligOrdinal
 Type: Package
 Title: Implements Ordinal Binomial Models in Zelig
-Version: 1.0-3
+Version: 1.0-4
 Date: 2011-05-04
 Author: Matt Owen, Kosuke Imai, Gary King, and Olivia Lau
 Depends: Zelig (>= 4.0-6), MASS
